@@ -1,16 +1,13 @@
 import React, { useCallback, useEffect } from 'react'
-import useCodeMirror from './use-codemirror'
+import useCodeMirror from './packages/use-codemirror'
 
 
 const editor = (props) => {
-  const { onChange, initialDoc } = props
-  const handleChange = useCallback(
-    state => onChange(state.doc.toString()),
-    [onChange]
-  )
+  const { onChange, initialDoc, setHandle } = props
+
   const [refContainer, editorView] = useCodeMirror({
     initialDoc: initialDoc,
-    onChange: handleChange
+    onChange: setHandle
   })
 
   useEffect(() => {

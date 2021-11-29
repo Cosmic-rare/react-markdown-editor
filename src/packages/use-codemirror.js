@@ -21,7 +21,7 @@ export const transparentTheme = EditorView.theme({
 const syntaxHighlighting = HighlightStyle.define([
   {
     tag: tags.heading1,
-    fontSize: '1.6em',
+    fontSize: '1.8em',
     fontWeight: 'bold'
   },
   {
@@ -66,9 +66,7 @@ const useCodeMirror = (props) => {
         syntaxHighlighting,
         EditorView.lineWrapping,
         EditorView.updateListener.of(update => {
-          if (update.changes) {
-            onChange && onChange(update.state)
-          }
+          onChange(update.state.doc.text.join("\n"))
         })
       ]
     })
