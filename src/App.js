@@ -1,43 +1,53 @@
-/** @jsxImportSource @emotion/react */
-
-import { useState } from "react"
-import logo from "./logo.svg"
-import { css } from "@emotion/react"
-
-const azure = css`
-  color: azure;
-`
-const logoStyle = css`
-  height: 40vmin;
-  pointer-events: none;
-  animation: rotate-anime 15s linear infinite;
-  @keyframes rotate-anime {
-    0%  {transform: rotate(0);}
-    100%  {transform: rotate(360deg);}
-  }
-`
-const buttonStyle = css`
-  margin-bottom: 10px;
-`
+import React, { useState, useCallback } from 'react'
+import Editor from './editor'
+import Preview from './preview'
 
 const App = () => {
-  const [count, setCount] = useState(0)
+  const [doc, setDoc] = useState(`# Hello!
 
-  return(
-    <div css={css`
-      text-align: center;
-    `}>
-      <h1 css={azure}>Hello, React.js</h1>
-
-      <div className="button" css={buttonStyle}>
-        <button 
-          onClick={() => {setCount(count + 1)}} 
-        >
-          Count: {count}
-        </button>
+  It's is MarkdownEditor.
+  
+  ## Use packages
+  
+  - \`remark\`(\`MarkdownParser\`)
+  - \`CodeMirror6\`(Online\`Editor\`)
+  - \`React.js\`(frontend  framework)
+  - \`Emotion\`(CSS in JS liblary)
+  
+  ## syntax highlight
+  \`\`\`jsx
+  import React, { useState, useCallback } from 'react'
+  import Editor from './editor'
+  import Preview from './preview'
+  
+  const App = () => {
+    const [doc, setDoc] = useState('# Hello, World!\\n')
+  
+    const handleDocChange = useCallback(newDoc => {
+      setDoc(newDoc)
+    }, [])
+  
+    return (
+      <div className='app'>
+        <Editor onChange={handleDocChange} initialDoc={doc} />
+        <Preview doc={doc} />
       </div>
+    )
+  }
+  
+  export default App
+  \`\`\`
+  `)
 
-      <img src={logo} alt="react-logo.svg" css={logoStyle} />
+  const handleDocChange = useCallback(newDoc => {
+    setDoc(newDoc)
+    console.log(newDoc)
+  }, [])
+
+  return (
+    <div className='app'>
+      <Editor onChange={handleDocChange} initialDoc={doc} />
+      <Preview doc={doc} />
     </div>
   )
 }
