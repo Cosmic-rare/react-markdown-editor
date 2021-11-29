@@ -3,7 +3,7 @@ import useCodeMirror from './packages/use-codemirror'
 
 
 const editor = (props) => {
-  const { onChange, initialDoc, setHandle } = props
+  const { initialDoc, setHandle } = props
 
   const [refContainer, editorView] = useCodeMirror({
     initialDoc: initialDoc,

@@ -7,20 +7,15 @@ const App = () => {
   const [doc, setDoc] = useState("# Hello, World!")
   const [html, setHtml] = useState(md.render(doc))
 
-  const handleDocChange = (newDoc) =>  {
-    setDoc(newDoc)
-    setHtml(md.render(doc))
-    console.log(md.render(doc))
-  }
   const setHandle = (document) => {
-    console.log(document)
+    setHtml(md.render(document))
   }
 
   return (
     <div className='app'>
-      <Editor onChange={handleDocChange} initialDoc={doc} setHandle={setHandle}/>
+      <Editor initialDoc={doc} setHandle={setHandle}/>
       {/* <Preview doc={doc} /> */}
-      <div className='preview markdownbody'>{html}</div>
+      <div className='preview markdownbody' dangerouslySetInnerHTML={{ __html: html }}></div>
     </div>
   )
 }
